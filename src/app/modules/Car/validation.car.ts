@@ -1,12 +1,26 @@
 import { z } from "zod";
 
-export const carZodSchema = z.object({
-  name: z.string().min(1, "Car name is required"),
-  description: z.string().min(1, "Description is required"),
-  color: z.string().min(1, "Color is required"),
-  isElectric: z.boolean(),
-  status: z.enum(["available", "unavailable"]).default("available"),
-  features: z.array(z.string()).nonempty("Features are required"),
-  pricePerHour: z.number().positive("Price per hour must be a positive number"),
-  isDeleted: z.boolean().default(false),
+const createCarValidationSchema = z.object({
+  body: z.object({
+    name: z.string({
+      invalid_type_error: "Password must be string",
+    }),
+    description: z.string({
+      invalid_type_error: "Description must be string",
+    }),
+    color: z.string({
+      invalid_type_error: "Color must be string",
+    }),
+    isElectric: z.boolean(),
+    features: z.array(z.string(), {
+      invalid_type_error: "features must be an array",
+    }),
+    pricePerHour: z.number({
+      invalid_type_error: "pricePerHour must be number",
+    }),
+  }),
 });
+
+export const CarValidationSchema = {
+  createCarValidationSchema,
+};
