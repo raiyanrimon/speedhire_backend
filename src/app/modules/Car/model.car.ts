@@ -3,7 +3,7 @@ import { TCar } from "./interface.car";
 
 const CarSchema = new Schema<TCar>(
   {
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     description: { type: String, required: true },
     color: { type: String, required: true },
     isElectric: { type: Boolean, required: true },
