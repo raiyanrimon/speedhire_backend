@@ -10,7 +10,9 @@ type TSigninUser = {
 };
 
 const createUserIntoDB = async (payload: TUser) => {
-  return await User.create(payload);
+  const user = await User.create(payload);
+  const result = await User.findById(user._id).select("-password");
+  return result;
 };
 
 const signinUser = async (payload: TSigninUser) => {
@@ -35,7 +37,6 @@ const signinUser = async (payload: TSigninUser) => {
     config.jwt_access_secret as string,
     config.jwt_access_expires_in as string
   );
-
   return { user, token };
 };
 

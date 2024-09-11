@@ -1,4 +1,5 @@
 export interface TCar {
+  save(): unknown;
   name: string;
   description: string;
   color: string;
